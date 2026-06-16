@@ -19,7 +19,17 @@ class ComentarioTree {
         return novoComentario;
     }
 
-    public void removerComentario(Comentario comentario);
+
+    public void removerComentario(Comentario comentario){
+        if(comentario == null || comentario ==raiz){
+            return;
+        }
+        Comentario pai = comentario.getPai();
+
+        if(pai !=null){
+            pai.getRespostas().remove(comentario);
+        }
+    }
 
     public Comentario buscarPorId(int id) {
         return buscarRecursivo(raiz, id);
@@ -29,7 +39,7 @@ class ComentarioTree {
         if(atual == null) {
             return null;
         }
-    
+
         if(atual.getId() == id) {
             return atual;
         }
@@ -39,13 +49,19 @@ class ComentarioTree {
 
             if(encontrado != null) {
                 return encontrado;
-            }  
+            }
         }
         return null;
     }
-
-
-    public String obterCaminho(Comentario comentario);
+    public String obterCaminho(Comentario comentario){
+        if(comentario.getPai()==null){
+            return "DUSCUSSÃO";
+        }
+        return obterCaminho(comentario.getPai())
+                + " > "
+                + comentario.getId();
+        }
+    }
 
     public List<Comentario> listarFolhas();
 
