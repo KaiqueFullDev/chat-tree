@@ -4,11 +4,12 @@ public class UI {
 
     public static void exibirComentario(Comentario comentario, String caminho){
         System.out.println("=============================================================");
+        System.out.printf("Caminho: %s%n", caminho);
         System.out.printf("ID: %d%n", comentario.getId());
         System.out.printf("Autor: %s%n", comentario.getAutor());
-        System.out.printf("%nTexto:%n%s%n%n", comentario.getTexto());
-        System.out.printf("Respostas: %d%n", comentario.getQuantidadeRespostas());
-        System.out.printf("%nCaminho:%n%s%n", caminho);
+        System.out.printf("Texto:%n%s%n%n", comentario.getTexto());
+        System.out.printf("N° de Respostas: %d%n", comentario.getQuantidadeRespostas());
+
         System.out.println("=============================================================");
 
         // Comentários filhos diretos
@@ -47,7 +48,7 @@ public class UI {
         System.out.println("=============================================================");
         System.out.println("Bem-vindo! Este sistema permite organizar discussões em formato " +
                             "hierárquico. Você pode responder a comentários específicos, " +
-                            "navegar entre discussões de pais/filhos e visualizar a árvore.");
+                            "navegar entre discussões e visualizar a árvore.");
         System.out.println("=============================================================");
 
         exibirMenu();

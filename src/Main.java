@@ -8,43 +8,40 @@ public class Main {
         Scanner sc=new Scanner(System.in);
 
         String escolha="";
-        UI.MenuInicial();
+        UI.exibirMenuInicial();
         ComentarioTree ct= new ComentarioTree();
-        ForumService s= new ForumService(ct);
+        ForumService s= new ForumService(ct,sc);
         Comentario comentarioAtual= ct.getRaiz();
         while(comentarioAtual!=null){
 
-            UI.exibirComentario(comentarioAtual);
+            UI.exibirComentario(comentarioAtual,ct.obterCaminho(comentarioAtual));
 
             String comando = s.lerComando(sc);
 
             switch(comando.toUpperCase()){
 
                 case "C":
-                    //s.criarComentario(comentarioAtual);
+                    s.criarComentario(comentarioAtual);
                     break;
 
                 case "E":
-                    //s.editarComentario(comentarioAtual);
+                    s.editarComentario(comentarioAtual);
                     break;
 
                 case "D":
-                    //comentarioAtual =s.deletarComentarioAtual(comentarioAtual);
+                    comentarioAtual =s.deletarComentarioAtual(comentarioAtual);
                     break;
 
                 case "VER":
-                    try {
-                        //int id =s.lerId(scanner);
-                        //destino = ct.buscarPorID(id);
 
-                        if (destino != null)
-                            comentarioAtual = destino;
-                    }catch( IllegalArgumentException e){
+                    int id =s.lerId(sc);
+                    Comentario destino = ct.buscarPorId(id);
 
-                    }catch( InputMismatchException e){
-
+                    if (destino != null)
+                        comentarioAtual = destino;
+                    else{
+                        System.out.println("Não exixte u comentario com esse ID");
                     }
-
                     break;
 
                 case "B":
@@ -55,11 +52,11 @@ public class Main {
                     break;
 
                 case "F":
-                    UI.exibirFolhas(ct.listarFolhas());
+        //            UI.exibirFolhas(ct.listarFolhas());
                     break;
 
                 case "A":
-                    UI.exibirArvore(ct.gerarArvoreTexto());
+          //          UI.exibirArvore(ct.gerarArvoreTexto());
                     break;
 
                 case "M":
@@ -67,7 +64,7 @@ public class Main {
                     break;
 
                 case "U":
-                    UI.exibirComentario(s.comentariosDoAutor());
+            //        UI.exibirComentario(s.comentariosDoAutor());
                     break;
                 case "VI":
 

@@ -9,7 +9,10 @@ class ComentarioTree {
         raiz = new Comentario("", "DISCUSSÃO", null);
     }
 
-    public Comentario getRaiz();
+    public Comentario getRaiz() {
+        return raiz;
+    }
+
 
     public Comentario adicionarComentario(String autor, String texto, Comentario pai) {
         Comentario novoComentario = new Comentario(autor, texto, pai);
@@ -53,6 +56,7 @@ class ComentarioTree {
         }
         return null;
     }
+
     public String obterCaminho(Comentario comentario){
         if(comentario.getPai()==null){
             return "DUSCUSSÃO";
@@ -60,10 +64,10 @@ class ComentarioTree {
         return obterCaminho(comentario.getPai())
                 + " > "
                 + comentario.getId();
-        }
     }
 
-    public List<Comentario> listarFolhas();
+
+   /* public List<Comentario> listarFolhas();
 
     public int contarComentarios();
 
@@ -72,7 +76,7 @@ class ComentarioTree {
     public LinkedList<Comentario> comentariosDoAutor(String nomeDoAutor){
 
 
-    }
+    }*/
 }
 
 /*

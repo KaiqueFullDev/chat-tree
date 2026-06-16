@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 /**
  * Camada de serviço do fórum.
  *
