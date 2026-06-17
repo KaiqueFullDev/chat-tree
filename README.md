@@ -85,8 +85,8 @@ Ponto de entrada da aplicação.
 
 
 ## Novas tarefas:
-* Kaique: Atualizar menu, com base no swicth da main, fazer metodo exibirLIstaDeComentarios();
-* Charles: EditarComentario: Não permitir editar comentario raiz, em lerID(), colocar mengsaem: "Digitar Id"
+* Kaique: Atualizar menu, com base no swicth da main, fazer metodo exibirLIstaDeComentariosDoAutor();
+* Charles: EditarComentario: Não permitir editar comentario raiz, em lerID(), colocar mengsaem: "Digitar Id". Em lerId é importante diferenciar se a pessoa digitou um id invalido por ser n numero inteiro ou, msm se for inteiro, ele n existir
 
 
 
