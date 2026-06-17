@@ -4,50 +4,70 @@ import java.util.List;
 public class UI {
 
     public static void exibirComentario(Comentario comentario, String caminho){
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.printf("Caminho: %s%n", caminho);
         System.out.printf("ID: %d%n", comentario.getId());
         System.out.printf("Autor: %s%n", comentario.getAutor());
         System.out.printf("Texto:%s%n", comentario.getTexto());
         System.out.printf("N° de Respostas: %d%n", comentario.getQuantidadeRespostas());
 
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
 
         // Comentários filhos diretos
         if (comentario.getQuantidadeRespostas() > 0) {
             System.out.println("Respostas diretas :");
-            for (Comentario filho : comentario.getRespostas()) {
-                System.out.printf("  -> " + filho);
-            }
-            System.out.println("=============================================================");
+            listarRespostasDiretas(comentario.getRespostas());
         }
     }
 
-    public static void exibirComentarios(LinkedList<Comentario> listaComentarios){
-        /*fazer algo semelhante a impressão de comentarios filhos. Fazer caso parametrro seja null e falar que esse
-        autor n existe*/
+    public static void exibirListaComentarios(LinkedList<Comentario> listaComentarios){
+        imprimirLinhaSeparadora();
+        System.out.println("RESULTADO DA BUSCA DE COMENTÁRIOS");
+        imprimirLinhaSeparadora();
 
+        // Validação de lista nula ou sem elementos
+        if (listaComentarios == null || listaComentarios.isEmpty()) {
+            System.out.println("Erro: Este autor não existe ou não possui comentários publicados.");
+            imprimirLinhaSeparadora();
+            return;
+        }
+
+        // Imprime os comentários
+        for (Comentario c : listaComentarios) {
+            System.out.printf("[ID: %d] Autor: %s%n", c.getId(), c.getAutor());
+            System.out.printf("Texto: %s%n", c.getTexto());
+
+            // Mostra o Id do pai (caso exista)
+            if (c.getPai() != null && c.getPai().getAutor() != null && !c.getPai().getAutor().isEmpty()) {
+                System.out.printf("Em resposta a: %s (ID: %d)%n", c.getPai().getAutor(), c.getPai().getId());
+            } else if (c.getPai() != null) {
+                System.out.println("Em resposta à raiz da discussão.");
+            }
+
+            imprimirLinhaSeparadora();
+        }
+
+        System.out.printf("Total de comentários encontrados nesta listagem: %d%n", listaComentarios.size());
+        imprimirLinhaSeparadora();
     }
+
     public static void exibirConvrsaPrincipal(ComentarioTree ct){
-        Comentario raiz=ct.getRaiz();
+        Comentario raiz = ct.getRaiz();
         System.out.printf("Texto:%s%n", raiz.getTexto());
         System.out.printf("Total de comentarios do Forum: %d%n", 0/*ct.contarComentarios()*/);
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.printf("N° de Comentarios: %d%n", raiz.getQuantidadeRespostas());
         // Comentários filhos diretos
         if (raiz.getQuantidadeRespostas() > 0) {
             System.out.println("Comentarios :");
-            for (Comentario filho : raiz.getRespostas()) {
-                System.out.println("  -> " + filho);
-            }
-            System.out.println("=============================================================");
+            listarRespostasDiretas(raiz.getRespostas());
         }
     }
 
     public static void exibirMenu(){
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("Menu de Comandos");
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("C - Criar comentário");
         System.out.println("D - Deletar comentário");
         System.out.println("E - Editar comentário");
@@ -59,25 +79,25 @@ public class UI {
         System.out.println("U - Mostrar total de comentários de um usuário");
 
         System.out.println("M - Mostrar menu");
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
     }
 
     public static void exibirTutorial(){
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("    SISTEMA DE FÓRUM EM ÁRVORE (DISCUSSÃO ENCADEADA)         ");
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("Bem-vindo! Este sistema permite organizar discussões em formato " +
-                            "hierárquico. Você pode responder a comentários específicos, " +
-                            "navegar entre discussões e visualizar a árvore.");
-        System.out.println("=============================================================");
+                "hierárquico. Você pode responder a comentários específicos, " +
+                "navegar entre discussões e visualizar a árvore.");
+        imprimirLinhaSeparadora();
 
         exibirMenu();
     }
 
     public static void exibirFolhas(List<Comentario> folhas){
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("COMENTÁRIOS SEM RESPOSTAS");
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         if (folhas == null || folhas.isEmpty()) {
             System.out.println("Não existem comentários sem respostas no momento.");
         } else {
@@ -85,41 +105,47 @@ public class UI {
                 System.out.printf("[ID: %d] Autor: %s | Texto: %s%n", f.getId(), f.getAutor(), f.getTexto());
             }
         }
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
     }
 
     public static void exibirArvore(String arvoreTexto){
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.println("ESTRUTURA COMPLETA DA ÁRVORE DE DISCUSSÃO");
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         if (arvoreTexto == null || arvoreTexto.trim().isEmpty()) {
             System.out.println("(Árvore vazia)");
         } else {
             System.out.println(arvoreTexto);
         }
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
     }
 
     public static void limparTela(){
-
         for (int i = 0; i < 50; i++) {
             System.out.println();
-
         }
     }
 
     public static void exibirTotalComentarios(int total) {
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.printf("Total de comentários na árvore: %d%n", total);
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
     }
 
     public static void exibirTotalPorAutor(String autor, int total) {
-        System.out.println("=============================================================");
+        imprimirLinhaSeparadora();
         System.out.printf("O usuário '%s' publicou um total de %d comentário(s).%n", autor, total);
+        imprimirLinhaSeparadora();
+    }
+
+    private static void imprimirLinhaSeparadora() {
         System.out.println("=============================================================");
     }
 
-
-
+    private static void listarRespostasDiretas(List<Comentario> respostas) {
+        for (Comentario filho : respostas) {
+            System.out.println("  -> " + filho);
+        }
+        imprimirLinhaSeparadora();
+    }
 }

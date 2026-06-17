@@ -31,7 +31,7 @@ public class Comentario {
     public String getTexto() { return texto; }
     public Comentario getPai() { return pai; }
 
-    // Métodos adicionados para que a classe UI consiga ler as respostas:
+    // Métodos para garantir a leitura da classe UI
     public LinkedList<Comentario> getRespostas() {
         return respostas;
     }
